@@ -10,12 +10,10 @@ class Rocket2 extends Phaser.GameObjects.Sprite {
 
     update() {
         //left/right movement
-        if(!this.isFiring) {
-            if(keyA.isDown && this.x >= 47) {
-                this.x -= 2;
-            } else if(keyD.isDown && this.x <= 578) {
-                this.x += 2;
-            }
+        if(keyA.isDown && this.x >= 47) {
+            this.x -= 2;
+        } else if(keyD.isDown && this.x <= 578) {
+            this.x += 2;
         }
         // fire button
         if (Phaser.Input.Keyboard.JustDown(keyW) && !this.isFiring) {
