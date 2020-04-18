@@ -4,6 +4,7 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('menubackground', './assets/menubackground.png');
         // load audio
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
@@ -11,12 +12,13 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
+        this.menubackground = this.add.tileSprite(0, 0, 640, 480, 'menubackground').setOrigin(0, 0);
         //menu display
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            backgroundColor: '#15CDEE',
+            color: '#D25B5B',
             align: 'right',
             padding: {
                 top: 5,
@@ -31,10 +33,16 @@ class Menu extends Phaser.Scene {
         let textSpacer = 64;
 
         this.add.text(centerX, centerY - textSpacer, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY, 'Use ←→ / A, D to move & ↑ / F to Fire', menuConfig).setOrigin(0.5);
+        this.add.text(centerX - textSpacer - 80, centerY, 'Player 1', menuConfig).setOrigin(0.5);
+        this.add.text(centerX + textSpacer + 80, centerY, 'Player 2', menuConfig).setOrigin(0.5);
+        menuConfig.fontSize = '20px';
+        this.add.text(centerX - textSpacer - 80, centerY + 30, '↑ to Fire/ ←→ to Move', menuConfig).setOrigin(0.5);
+        this.add.text(centerX + textSpacer + 80, centerY + 30, 'W to Fire/ AD to Move', menuConfig).setOrigin(0.5);
+        menuConfig.fontSize = '28px';
         menuConfig.backgroundColor = '#00FF00';
         menuConfig.color = '#000';
-        this.add.text(centerX, centerY + textSpacer, 'Press ← for Easy or → for Hard', menuConfig).setOrigin(0.5);
+        this.add.text(centerX - textSpacer - 20, centerY + textSpacer + 20, ' Easy ← ', menuConfig).setOrigin(0.5);
+        this.add.text(centerX + textSpacer + 20, centerY + textSpacer + 20, ' → Hard ', menuConfig).setOrigin(0.5);
 
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -63,5 +71,5 @@ class Menu extends Phaser.Scene {
           this.sound.play('sfx_select');
           this.scene.start("playScene");    
         }
-      }
+    }
 }
